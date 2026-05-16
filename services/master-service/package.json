@@ -1,0 +1,17 @@
+{
+  "name": "master-service",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=18.0.0" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "node migrate.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@neondatabase/serverless": "^0.9.3",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.8.5"
+  }
+}
