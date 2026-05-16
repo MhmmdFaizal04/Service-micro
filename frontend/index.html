@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Token Listrik - Sistem Pembelian Token PLN</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
+  <nav id="navbar" class="navbar hidden">
+    <div class="navbar-inner">
+      <span class="navbar-brand">TOKEN LISTRIK</span>
+      <div class="navbar-links">
+        <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+        <a href="#" class="nav-link" data-page="history">Riwayat</a>
+        <a href="#" class="nav-link" data-page="profile">Profil</a>
+        <a href="#" class="nav-link nav-logout" id="btn-logout">Keluar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════ LOGIN ══════════════════════════════ -->
+  <div id="page-login" class="page auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">TOKEN LISTRIK</div>
+      <p class="auth-tagline">Sistem Pembelian Token PLN</p>
+      <form id="form-login">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="login-email" placeholder="email@contoh.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="login-password" placeholder="Masukkan password" required />
+        </div>
+        <div id="login-error" class="alert alert-error hidden"></div>
+        <button class="btn btn-primary btn-full" type="submit" id="btn-login">Masuk</button>
+      </form>
+      <p class="auth-footer">Belum punya akun? <a href="#" id="go-register">Daftar sekarang</a></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ REGISTER ══════════════════════════════ -->
+  <div id="page-register" class="page auth-page hidden">
+    <div class="auth-card">
+      <div class="auth-logo">TOKEN LISTRIK</div>
+      <p class="auth-tagline">Buat Akun Baru</p>
+      <form id="form-register">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input class="form-input" type="text" id="reg-name" placeholder="Nama lengkap" required minlength="2" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="reg-email" placeholder="email@contoh.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="reg-password" placeholder="Minimal 6 karakter" required minlength="6" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nomor HP</label>
+          <input class="form-input" type="tel" id="reg-phone" placeholder="08xxxxxxxxxx" />
+        </div>
+        <div id="reg-error" class="alert alert-error hidden"></div>
+        <div id="reg-success" class="alert alert-success hidden"></div>
+        <button class="btn btn-primary btn-full" type="submit" id="btn-register">Daftar</button>
+      </form>
+      <p class="auth-footer">Sudah punya akun? <a href="#" id="go-login">Masuk</a></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ DASHBOARD ══════════════════════════════ -->
+  <div id="page-dashboard" class="page hidden">
+    <div class="container">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-subtitle" id="welcome-text">Selamat datang</p>
+        </div>
+      </div>
+      <h2 class="section-title">Pilih Nominal Token</h2>
+      <div id="products-grid" class="products-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ HISTORY ══════════════════════════════ -->
+  <div id="page-history" class="page hidden">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Riwayat Transaksi</h1>
+      </div>
+      <div id="history-content"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ PROFILE ══════════════════════════════ -->
+  <div id="page-profile" class="page hidden">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Profil Saya</h1>
+      </div>
+      <div class="profile-card">
+        <div class="profile-top">
+          <div class="avatar" id="profile-avatar">A</div>
+          <div class="profile-meta">
+            <h2 id="profile-name">-</h2>
+            <p id="profile-email-display">-</p>
+            <span class="role-badge" id="profile-role">customer</span>
+          </div>
+        </div>
+        <form id="form-profile">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nama Lengkap</label>
+              <input class="form-input" type="text" id="prof-name" required minlength="2" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nomor HP</label>
+              <input class="form-input" type="tel" id="prof-phone" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email (tidak dapat diubah)</label>
+            <input class="form-input" type="email" id="prof-email" disabled />
+          </div>
+          <div id="prof-error" class="alert alert-error hidden"></div>
+          <div id="prof-success" class="alert alert-success hidden"></div>
+          <button class="btn btn-primary" type="submit" id="btn-save-profile">Simpan Perubahan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ MODAL: BELI TOKEN ══════════════════════════════ -->
+  <div id="modal-buy" class="modal hidden">
+    <div class="modal-backdrop" id="modal-buy-backdrop"></div>
+    <div class="modal-card">
+      <h2 class="modal-title">Konfirmasi Pembelian</h2>
+      <div class="confirm-list">
+        <div class="confirm-row">
+          <span class="confirm-key">Produk</span>
+          <span class="confirm-val" id="confirm-name">-</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">Nominal</span>
+          <span class="confirm-val" id="confirm-denomination">-</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">Harga</span>
+          <span class="confirm-val confirm-price" id="confirm-price">-</span>
+        </div>
+      </div>
+      <div id="modal-buy-error" class="alert alert-error hidden"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btn-cancel-buy">Batal</button>
+        <button class="btn btn-primary" id="btn-confirm-buy">Beli Sekarang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ MODAL: SUKSES ══════════════════════════════ -->
+  <div id="modal-success" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card modal-card-success">
+      <div class="success-badge">BERHASIL</div>
+      <h2 class="modal-title">Pembelian Berhasil</h2>
+      <p class="modal-subtitle">Nomor Token Listrik Kamu</p>
+      <div class="token-number-display" id="result-token">-</div>
+      <div class="result-meta">
+        <span id="result-product">-</span>
+        <span class="result-separator">|</span>
+        <span id="result-amount">-</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="btn-close-success">Lihat Riwayat</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
